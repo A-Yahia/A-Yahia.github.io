@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdelrhman Y. Soliman | PhD Researcher · Camera-based Physiology &amp; Biosignal AI</title>
+<meta name="description" content="Abdelrhman Y. Soliman — PhD researcher at the IRCV group, Universitat Rovira i Virgili (Tarragona, Spain). Contactless heart-rate estimation from RGB video, NIR video and FMCW radar for driver monitoring; deep learning for PPG, rPPG and ECG.">
+<meta property="og:title" content="Abdelrhman Y. Soliman — PhD Researcher, Universitat Rovira i Virgili">
+<meta property="og:description" content="Contactless vital signs for driver monitoring (RGB, NIR, radar), low-light rPPG, PPG-based glucose estimation and ECG–PPG stress classification.">
+<meta property="og:type" content="profile">
+<meta property="og:image" content="photo.jpg">
+<meta name="theme-color" content="#2E86E0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Abdelrhman Yahia Soliman",
+  "jobTitle": "PhD Researcher",
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "Universitat Rovira i Virgili" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Aswan University" },
+  "email": "mailto:abdelrhman.y.soliman@urv.cat",
+  "image": "photo.jpg",
+  "knowsAbout": ["Remote photoplethysmography (rPPG)", "FMCW radar vital signs", "Driver monitoring", "PPG-based blood glucose estimation", "ECG–PPG stress classification", "Deep learning for biosignals"],
+  "sameAs": [
+    "https://scholar.google.com/citations?user=a615v9sAAAAJ&hl=en",
+    "https://www.linkedin.com/in/abdelrhman-yahia/",
+    "https://github.com/A-Yahia"
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="topnav" id="topnav" aria-label="Main">
+  <a class="brand" href="#top"><span class="brand-mark">AS</span>Abdelrhman Soliman</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#top" data-nav="top">Home</a>
+    <a href="#research" data-nav="research">Research</a>
+    <a href="#projects" data-nav="projects">Projects</a>
+    <a href="#publications" data-nav="publications">Publications</a>
+    <a href="#experience" data-nav="experience">Experience</a>
+    <a href="#teaching" data-nav="teaching">Teaching</a>
+    <a href="#skills" data-nav="skills">Skills</a>
+    <a href="#contact" data-nav="contact">Contact</a>
+  </div>
+  <div class="nav-tools">
+    <a class="nav-cv" href="Abdelrhman_Y_Soliman_CV.pdf" download>Download CV</a>
+    <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><line x1="12" y1="2.5" x2="12" y2="5.2"/><line x1="12" y1="18.8" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5.2" y2="12"/><line x1="18.8" y1="12" x2="21.5" y2="12"/><line x1="5.1" y1="5.1" x2="7" y2="7"/><line x1="17" y1="17" x2="18.9" y2="18.9"/><line x1="18.9" y1="5.1" x2="17" y2="7"/><line x1="7" y1="17" x2="5.1" y2="18.9"/></g></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <canvas id="beamCanvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="avail">
+          <span class="dot"></span>
+          <span class="avail-text">
+            <span class="avail-line">Open to research collaborations in contactless vital-sign sensing.</span>
+            <span class="avail-line">Happy to talk rPPG, radar and biosignal benchmarks.</span>
+          </span>
+        </span>
+        <h1>Abdelrhman Y. Soliman</h1>
+        <div class="role"><strong>PhD Researcher</strong> - Camera-based Physiology &amp; Biosignal AI</div>
+        <div class="at">IRCV Lab, Universitat Rovira i Virgili, Tarragona, Spain</div>
+        <div class="rotator" aria-live="off">Working on <b id="rotator">contactless heart rate for drivers</b></div>
+
+        <p class="bio">
+          I build deep learning models that read the body's signals without touching it. My PhD at the
+          Intelligent Robotics and Computer Vision (IRCV) group fuses RGB video, near-infrared video and
+          FMCW radar to estimate a driver's heart rate inside the car, including in the dark and under
+          head motion. Before that, I estimated blood glucose from PPG signals at Aswan University.
+        </p>
+
+        <div class="collapsible collapsed" id="bioMore">
+          <div class="collapse-inner">
+            <p class="bio">
+              Measuring physiology from a distance has been the thread of my work since my BSc graduation
+              project on remote heart-rate measurement from face video. My MSc thesis estimated blood glucose
+              from PPG with a hybrid CNN-GRU network.
+              Along the way I have worked with ECG, BCG and radar signals, taught computer vision and machine
+              learning to more than 200 students, and learned to care most about models that hold up on
+              unseen subjects, unseen datasets and poor lighting, not only on average.
+            </p>
+          </div>
+        </div>
+
+        <button class="more-btn" type="button" data-toggle="bioMore" aria-expanded="false" aria-controls="bioMore"
+                data-more="More about me" data-less="Show less">
+          <span class="more-label">More about me</span>
+          <svg class="chev" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#research">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>See my research
+          </a>
+          <a class="btn btn-ghost" href="Abdelrhman_Y_Soliman_CV.pdf" download>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>Download CV
+          </a>
+          <a class="btn btn-ghost" href="mailto:abdelrhman.y.soliman@urv.cat">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1.8"/><path d="m4 6.5 8 6.2 8-6.2"/></svg>Email me
+          </a>
+        </div>
+
+        <div class="links-row">
+          <a href="https://scholar.google.com/citations?user=a615v9sAAAAJ&hl=en" target="_blank" rel="noopener"><svg class="link-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 10.5 12 5l8 5.5-8 5.5-8-5.5Z"/><path d="M7 12.3v4.4c0 1.4 2.2 3.3 5 3.3s5-1.9 5-3.3v-4.4"/></svg>Google Scholar</a>
+          <a href="https://www.linkedin.com/in/abdelrhman-yahia/" target="_blank" rel="noopener"><svg class="link-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="7" cy="7.2" r="1.2" fill="currentColor" stroke="none"/><line x1="7" y1="10.6" x2="7" y2="17"/><path d="M11 17v-4.1c0-1.7 1.1-2.9 2.8-2.9 1.6 0 2.7 1.1 2.7 2.9V17"/><line x1="11" y1="10.6" x2="11" y2="17"/></svg>LinkedIn</a>
+          <a href="https://github.com/A-Yahia" target="_blank" rel="noopener"><svg class="link-ico" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m8 8-4 4 4 4"/><path d="m16 8 4 4-4 4"/><path d="m13.5 5.5-3 13"/></svg>GitHub</a>
+        </div>
+      </div>
+
+      <div class="portrait-frame" id="portraitFrame">
+        <div class="portrait-initials" aria-hidden="true">AS</div>
+        <img src="photo.jpg" alt="Portrait of Abdelrhman Y. Soliman" width="400" height="400" onerror="this.remove()">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ METRICS ============ -->
+  <div class="wrap metrics-wrap">
+    <div class="metrics reveal" id="metricsBlock">
+      <div class="metric"><span class="num" data-count-to="5">0</span><span class="label">publications</span></div>
+      <div class="metric"><span class="num" data-count-to="11">0</span><span class="label">public biosignal datasets used</span></div>
+      <div class="metric"><span class="num"><span data-count-to="200">0</span>+</span><span class="label">students taught in CV &amp; ML</span></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+  <!-- ============ RESEARCH ============ -->
+  <section id="research" class="sec reveal">
+    <div class="sec-head">
+      <h2>Research</h2>
+      <span class="note">rPPG · Radar vital signs · Biosignal deep learning</span>
+    </div>
+    <p class="sec-lede">
+      My research asks how far we can go in measuring physiology without contact or with a single cheap sensor:
+      heart rate from a camera or a radar, glucose from a PPG pulse, stress from a wearable. The application I
+      focus on now is driver monitoring, where light changes fast, the head moves, and the model has to work for
+      people it has never seen.
+    </p>
+
+    <div class="collapsible collapsed" id="researchMore">
+      <div class="collapse-inner">
+        <div class="research-detail">
+          <h3>Key research directions</h3>
+          <ul>
+            <li><strong>A)</strong> Multimodal contactless heart rate for drivers: fusing RGB video, NIR video and
+            FMCW radar so each sensor covers the others' weak conditions, with self-supervised pretraining and
+            fusion architectures as the main levers.</li>
+            <li><strong>B)</strong> rPPG under extreme lighting: keeping pulse recovery reliable at night and in
+            mixed light, and classifying illumination in rPPG video into five lux levels (L0–L4) without labels,
+            for dataset curation and quality control.</li>
+            <li><strong>C)</strong> Deep learning for biosignals in health: non-invasive blood glucose from PPG,
+            ECG–PPG stress classification, and blood pressure estimation next.</li>
+          </ul>
+
+          <h3>How I evaluate</h3>
+          <ul>
+            <li><strong>A)</strong> Subject-independent splits only (leave-one-subject-out or subject-wise folds), so
+            no person appears in both training and test.</li>
+            <li><strong>B)</strong> Cross-dataset testing, with the same preprocessing and metrics for every method.</li>
+            <li><strong>C)</strong> Worst-condition error reported next to the average, because a driver-monitoring
+            model is only as good as its darkest, shakiest minute.</li>
+          </ul>
+
+          <h3>Goals for the PhD</h3>
+          <ul>
+            <li><strong>A)</strong> Publications in IEEE Transactions and Q1 journals, plus top vision venues.</li>
+            <li><strong>B)</strong> An open benchmark toolbox for radar vital signs, in the spirit of rPPG-Toolbox.</li>
+            <li><strong>C)</strong> Reproducible code and fair comparisons that other groups can build on.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <button class="more-btn" type="button" data-toggle="researchMore" aria-expanded="false" aria-controls="researchMore"
+            data-more="Read the full research statement" data-less="Show less">
+      <span class="more-label">Read the full research statement</span>
+      <svg class="chev" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+
+    <div class="tag-grid">
+      <span class="tag">Remote Photoplethysmography (rPPG)</span>
+      <span class="tag">RGB &amp; NIR Face Video</span>
+      <span class="tag">FMCW Radar Vital Signs</span>
+      <span class="tag">Driver Monitoring</span>
+      <span class="tag">Multimodal Fusion</span>
+      <span class="tag">PPG Glucose Estimation</span>
+      <span class="tag">ECG–PPG Stress</span>
+      <span class="tag">Subject-independent Evaluation</span>
+    </div>
+
+    <div class="card-grid cols-3">
+      <article class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="10" r="5.5"/><path d="M9.5 9h.01M14.5 9h.01"/><path d="M9.8 12.2c1.3 1 3.1 1 4.4 0"/><path d="M5 20.5c1.6-2 4.1-3 7-3s5.4 1 7 3"/></svg></div>
+        <h3>Camera-based physiology</h3>
+        <p>Heart rate from RGB and near-infrared face video, with a focus on low light, mixed illumination and head motion inside the car.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 18V12"/><path d="M2.5 18.5h3"/><path d="M8 9a6 6 0 0 1 0 6"/><path d="M11.5 6.5a10 10 0 0 1 0 11"/><path d="M15 4a14 14 0 0 1 0 16"/></svg></div>
+        <h3>Radar vital signs</h3>
+        <p>FMCW radar processing (clutter removal, CFAR detection, target localization) feeding multi-scale CNNs for contactless heart rate.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></div>
+        <h3>Biosignal deep learning</h3>
+        <p>Hybrid and transfer-learning models on PPG and ECG: non-invasive glucose estimation and end-to-end stress classification.</p>
+      </article>
+    </div>
+
+    <div class="agenda">
+      <h3>What I am working toward</h3>
+      <ul>
+        <li>Heart rate that stays accurate for drivers at night and on the move.</li>
+        <li>Fusion of camera and radar that degrades gracefully when one sensor fails.</li>
+        <li>Fair, cross-dataset benchmarks for rPPG and radar vital signs.</li>
+        <li>Label-free quality checks for large video datasets.</li>
+        <li>Wearable-grade models for glucose, stress and blood pressure.</li>
+        <li>Open code that other labs can reproduce.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="sec reveal">
+    <div class="sec-head">
+      <h2>Projects</h2>
+      <span class="note">PhD thesis and funded research</span>
+    </div>
+    <p class="sec-lede">
+      The main lines of work behind my publications, from the funded glucose project in Egypt to my
+      current PhD at URV.
+    </p>
+
+    <div class="fund-list">
+      <div class="fund lead">
+        <div class="period">2026 – present</div>
+        <div>
+          <h3>Driver Monitoring System: contactless heart rate from RGB, NIR and radar</h3>
+          <p class="meta">PhD thesis · IRCV Lab, Universitat Rovira i Virgili · Supervisor: Assoc. Prof. Hatem A. Rashwan</p>
+          <span class="role">Doctoral researcher</span>
+        </div>
+        <div class="budget"><strong>PhD</strong><span>ongoing</span></div>
+      </div>
+      <div class="fund">
+        <div class="period">2023 – 2026</div>
+        <div>
+          <h3>PPG-based blood glucose level monitoring</h3>
+          <p class="meta">Funded research project · grant CFP# PRP2024.R36.5 · Aswan Wireless Communication Research Center, Egypt</p>
+          <span class="role">Research assistant</span>
+        </div>
+        <div class="budget"><strong>Funded</strong><span>research project</span></div>
+      </div>
+      <div class="fund">
+        <div class="period">2026</div>
+        <div>
+          <h3>Cross-modal correlation fusion for ECG–PPG stress classification</h3>
+          <p class="meta">IRCV Lab, URV · WESAD dataset, subject-wise cross-validation · presented at CCIA 2026</p>
+          <span class="role">First author</span>
+        </div>
+        <div class="budget"><strong>97.3%</strong><span>AUC-ROC</span></div>
+      </div>
+    </div>
+
+    <div class="collapsible collapsed" id="projMore">
+      <div class="collapse-inner">
+        <div class="fund-list gap-top">
+          <div class="fund">
+            <div class="period">2026</div>
+            <div>
+              <h3>Low-light remote photoplethysmography</h3>
+              <p class="meta">IRCV Lab, URV · pulse recovery from face video in dark and extreme lighting</p>
+              <span class="role">Lead researcher</span>
+            </div>
+            <div class="budget"><strong>In prep.</strong><span>paper</span></div>
+          </div>
+          <div class="fund">
+            <div class="period">2026</div>
+            <div>
+              <h3>Label-free illumination classification for rPPG video</h3>
+              <p class="meta">Five lux classes (L0 below 3 lux to L4 above 100 lux), learned from LRPD and BUAA-MIHR lux labels</p>
+              <span class="role">Lead researcher</span>
+            </div>
+            <div class="budget"><strong>L0–L4</strong><span>lighting classes</span></div>
+          </div>
+          <div class="fund">
+            <div class="period">2026</div>
+            <div>
+              <h3>FMCW radar heart-rate pipeline</h3>
+              <p class="meta">Clutter removal, band-pass filtering, CFAR detection and target localization feeding a multi-scale 2D CNN with squeeze-and-excitation gating</p>
+              <span class="role">Lead researcher</span>
+            </div>
+            <div class="budget"><strong>LOSO</strong><span>evaluation</span></div>
+          </div>
+          <div class="fund">
+            <div class="period">2023 – 2026</div>
+            <div>
+              <h3>Motion-robust heart rate: rPPG versus BCG</h3>
+              <p class="meta">Artifact detection for BCG signals and comparison of colour-based (rPPG) and motion-based (BCG) heart rate against clinical ground truth · AWCRC, Egypt</p>
+              <span class="role">Research assistant</span>
+            </div>
+            <div class="budget"><strong>BCG</strong><span>artifact detection</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="more-btn" type="button" data-toggle="projMore" aria-expanded="false" aria-controls="projMore"
+            data-more="See all 7 projects" data-less="Show fewer projects">
+      <span class="more-label">See all 7 projects</span>
+      <svg class="chev" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+
+    <div class="plans">
+      <h3>Looking for collaborators</h3>
+      <p>
+        I am interested in joint work on in-cabin datasets, radar and NIR sensing, and fair benchmarks for
+        contactless vital signs. If your lab collects data in these areas, or you want to compare methods on
+        the same protocol, I would like to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <section id="publications" class="sec reveal">
+    <div class="sec-head">
+      <h2>Publications</h2>
+      <span class="note">also on <a href="https://scholar.google.com/citations?user=a615v9sAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></span>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter publications by topic">
+      <button class="filter-chip active" data-filter="all" type="button" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="bgl" type="button" aria-pressed="false">Glucose monitoring</button>
+      <button class="filter-chip" data-filter="stress" type="button" aria-pressed="false">Stress</button>
+      <button class="filter-chip" data-filter="dl" type="button" aria-pressed="false">Deep learning</button>
+      <button class="filter-chip" data-filter="wireless" type="button" aria-pressed="false">Wireless</button>
+    </div>
+
+    <div class="pub-list" id="pubList">
+      <div class="pub" data-tags="stress dl">
+        <div class="year">2026</div>
+        <div>
+          <div class="title"><a href="https://scholar.google.com/citations?user=a615v9sAAAAJ&hl=en" target="_blank" rel="noopener">Cross-Modal Correlation Fusion for End-to-End ECG–PPG Stress Classification</a></div>
+          <div class="venue">Catalan Conference on Artificial Intelligence (CCIA 2026)</div>
+        </div>
+        <span class="qtag q2">Conf.</span>
+      </div>
+      <div class="pub" data-tags="wireless dl">
+        <div class="year">2026</div>
+        <div>
+          <div class="title"><a href="https://doi.org/10.1016/j.comnet.2026.112310" target="_blank" rel="noopener">Positioning information driven deep learning for XLRIS passive beamforming</a></div>
+          <div class="venue">Computer Networks, Vol. 282</div>
+        </div>
+        <span class="qtag q1">Q1</span>
+      </div>
+      <div class="pub" data-tags="bgl dl">
+        <div class="year">2026</div>
+        <div>
+          <div class="title"><a href="https://doi.org/10.1007/s11760-026-05368-5" target="_blank" rel="noopener">Hybrid deep learning-based blood glucose level monitoring using PPG signals</a></div>
+          <div class="venue">Signal, Image and Video Processing, Vol. 20</div>
+        </div>
+        <span class="qtag q2">Q2</span>
+      </div>
+      <div class="pub" data-tags="bgl">
+        <div class="year">2025</div>
+        <div>
+          <div class="title"><a href="https://aujst.journals.ekb.eg/article_434058.html" target="_blank" rel="noopener">A Comprehensive Study for Blood Glucose Level Monitoring Using Photoplethysmography</a></div>
+          <div class="venue">Aswan University Journal of Sciences and Technology</div>
+        </div>
+      </div>
+      <div class="pub" data-tags="bgl dl">
+        <div class="year">2024</div>
+        <div>
+          <div class="title"><a href="https://ieeexplore.ieee.org/document/10921552" target="_blank" rel="noopener">Non-Invasive Glucose Level Monitoring from PPG Using a Hybrid CNN-GRU Deep Learning Network</a></div>
+          <div class="venue">IEEE Conference on Advanced Topics on Measurement and Simulation (ATOMS 2024)</div>
+        </div>
+        <span class="qtag q2">Conf.</span>
+      </div>
+    </div>
+
+    <p class="pub-empty" id="pubEmpty" hidden>No publications match this filter. See <a href="https://scholar.google.com/citations?user=a615v9sAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a> for the complete list.</p>
+    <p class="pub-more">Work in preparation: low-light rPPG and multimodal driver heart-rate estimation. Updates appear first on <a href="https://scholar.google.com/citations?user=a615v9sAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="sec reveal">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <span class="note">Spain · Egypt</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item current">
+        <div class="when">2026 – present</div>
+        <h3>Doctoral Researcher</h3>
+        <div class="org">IRCV Lab, DEIM, Universitat Rovira i Virgili, Tarragona, Spain</div>
+        <p>PhD in Computer Engineering and Mathematics. Contactless heart-rate estimation for in-cabin driver monitoring from RGB video, NIR video and FMCW radar; low-light rPPG; label-free illumination classification; multimodal ECG–PPG stress classification (AUC 97.3%, accuracy 90.3%).</p>
+      </div>
+      <div class="tl-item">
+        <div class="when">Apr 2023 – Feb 2026</div>
+        <h3>Research Assistant</h3>
+        <div class="org">Aswan Wireless Communication Research Center (AWCRC), Egypt</div>
+        <p>Designed a hybrid CNN-GRU network for blood glucose estimation from PPG within a funded project; developed BCG motion-artifact detection; built preprocessing and training pipelines on UBFC-rPPG, VicarPPG-2, VitalDB and TokyoTech RGB-NIR.</p>
+      </div>
+      <div class="tl-item">
+        <div class="when">Aug 2024 – Feb 2026</div>
+        <h3>Instructor</h3>
+        <div class="org">National Telecommunication Institute (NTI) – Creativa, Aswan, Egypt</div>
+        <p>Designed and delivered computer vision and machine learning courses for 200+ students, with hands-on PyTorch, TensorFlow and scikit-learn projects.</p>
+      </div>
+      <div class="tl-item">
+        <div class="when">Apr 2023 – Feb 2026</div>
+        <h3>Teaching Assistant</h3>
+        <div class="org">Faculty of Engineering, Aswan University, Egypt</div>
+        <p>Supported Digital Signal Processing, Electronics, Network Theory and Communication Circuits; ran Verilog, Linux and Wireshark labs; supervised student projects in vital-sign monitoring, embedded systems and robotics.</p>
+      </div>
+    </div>
+
+    <div class="sec-head" id="education" style="margin-top:56px">
+      <h2>Education</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="when">2026 – present</div>
+        <div>
+          <h3>PhD, Computer Engineering and Mathematics</h3>
+          <div class="org">Universitat Rovira i Virgili, Tarragona, Spain</div>
+          <div class="thesis">"Driver Monitoring System" · Supervisor: Assoc. Prof. Hatem A. Rashwan</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="when">2021 – 2025</div>
+        <div>
+          <h3>MSc, Electrical, Electronics and Communications Engineering</h3>
+          <div class="org">Aswan University, Egypt</div>
+          <div class="thesis">"Non-invasive blood glucose level monitoring from PPG signals" · Advisor: Prof. Osama A. Omer · Very Good with honors (84%)</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="when">2015 – 2020</div>
+        <div>
+          <h3>BSc, Electronics and Communications Engineering</h3>
+          <div class="org">Aswan University, Egypt</div>
+          <div class="thesis">"Remote heart-rate measurement from face video using rPPG" (99%) · Excellent with honors, first runner-up of the class (86.1%)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEACHING ============ -->
+  <section id="teaching" class="sec reveal">
+    <div class="sec-head">
+      <h2>Teaching</h2>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><strong>200+</strong><span>students in CV &amp; ML courses</span></div>
+      <div class="stat"><strong>1.5 yrs</strong><span>instructor at NTI – Creativa</span></div>
+      <div class="stat"><strong>3 yrs</strong><span>teaching assistant, Aswan University</span></div>
+      <div class="stat"><strong>4</strong><span>undergraduate courses supported</span></div>
+    </div>
+    <div class="card-grid cols-2">
+      <article class="card">
+        <h3>Computer vision and machine learning</h3>
+        <p>CNNs, transfer learning, ResNet/DenseNet, object detection, segmentation, face recognition and core ML algorithms, taught through hands-on PyTorch, TensorFlow and scikit-learn projects at NTI – Creativa.</p>
+      </article>
+      <article class="card">
+        <h3>Signals and electronics (Aswan University)</h3>
+        <p>Digital Signal Processing, Electronics, Network Theory and Communication Circuits, with Verilog, Linux and Wireshark labs and supervision of student projects in vital-sign monitoring.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="sec reveal">
+    <div class="sec-head">
+      <h2>Skills and datasets</h2>
+      <span class="note">from raw signal to evaluated model</span>
+    </div>
+    <div class="card-grid cols-3">
+      <article class="card">
+        <div class="kicker">Languages</div>
+        <h3>Programming</h3>
+        <p class="skill-line">Python (primary), MATLAB, C/C++, Verilog</p>
+      </article>
+      <article class="card">
+        <div class="kicker">ML / DL</div>
+        <h3>Modelling</h3>
+        <p class="skill-line">PyTorch, TensorFlow/Keras, scikit-learn, XGBoost; CNNs, GRU, attention and transformers, transfer learning, multimodal fusion</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Signals</div>
+        <h3>Processing</h3>
+        <p class="skill-line">NumPy, SciPy, pandas, OpenCV; filtering, wavelet and time-frequency analysis, artifact detection, quality control</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Modalities</div>
+        <h3>Biosignals</h3>
+        <p class="skill-line">PPG, rPPG (RGB and NIR face video), ECG, BCG, FMCW radar</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Evaluation</div>
+        <h3>Protocol</h3>
+        <p class="skill-line">Leave-one-subject-out and subject-wise folds, cross-dataset testing, Parkes error grid for glucose</p>
+      </article>
+      <article class="card">
+        <div class="kicker">Tools</div>
+        <h3>Workflow</h3>
+        <p class="skill-line">Git, Linux, LaTeX, Matplotlib and Seaborn for publication figures</p>
+      </article>
+    </div>
+
+    <h3 class="sub-head">Datasets I have worked with</h3>
+    <div class="tag-grid tight">
+      <span class="tag">UBFC-rPPG</span>
+      <span class="tag">PURE</span>
+      <span class="tag">MMPD</span>
+      <span class="tag">VIPL-HR</span>
+      <span class="tag">BUAA-MIHR</span>
+      <span class="tag">LRPD</span>
+      <span class="tag">MR-NIRP</span>
+      <span class="tag">TokyoTech RGB-NIR</span>
+      <span class="tag">VicarPPG-2</span>
+      <span class="tag">VitalDB</span>
+      <span class="tag">WESAD</span>
+    </div>
+
+    <h3 class="sub-head">Awards and certificates</h3>
+    <div class="pub-list">
+      <div class="pub"><div class="year">2019</div><div><div class="title">First place, IEEE UEA 5 undergraduate projects</div><div class="venue">IEEE Aswan Student Branch</div></div><span class="qtag q1">Award</span></div>
+      <div class="pub"><div class="year">2017</div><div><div class="title">Second place, Codeit coding competition</div><div class="venue">Aswan University</div></div><span class="qtag q1">Award</span></div>
+      <div class="pub"><div class="year">2016</div><div><div class="title">Third place, Aswan Robotics Competition (ARC 2)</div><div class="venue">Aswan University</div></div><span class="qtag q1">Award</span></div>
+    </div>
+
+    <div class="collapsible collapsed" id="certMore">
+      <div class="collapse-inner">
+        <div class="pub-list gap-top">
+          <div class="pub"><div class="year">2024</div><div><div class="title"><a href="https://www.linkedin.com/learning/certificates/cbaa982fa677f3d0c382e365c11cb890ac1aada95381cbe6af16740813728e37" target="_blank" rel="noopener">Introduction to Attention-Based Neural Networks</a></div><div class="venue">LinkedIn Learning</div></div></div>
+          <div class="pub"><div class="year">2024</div><div><div class="title"><a href="https://www.linkedin.com/learning/certificates/45f962bb17293578669d1fc8185825dcc2c9514ac7fddfc6bb8003b332ea9179" target="_blank" rel="noopener">Wavelet Analysis: Applications with Wolfram Language</a></div><div class="venue">LinkedIn Learning</div></div></div>
+          <div class="pub"><div class="year">2024</div><div><div class="title"><a href="https://www.coursera.org/account/accomplishments/records/3M32SKUEEBME" target="_blank" rel="noopener">Machine Learning with Python</a></div><div class="venue">Coursera (IBM)</div></div></div>
+          <div class="pub"><div class="year">2023</div><div><div class="title"><a href="https://matlabacademy.mathworks.com/progress/share/certificate.html?id=be3b340e-1d86-4a21-bfbf-1a5bbc426b77" target="_blank" rel="noopener">Signal Processing Onramp</a></div><div class="venue">MathWorks</div></div></div>
+          <div class="pub"><div class="year">2020</div><div><div class="title"><a href="https://coursera.org/share/c68657a00fd308e50869c7a9819b5438" target="_blank" rel="noopener">Mathematics for Machine Learning Specialization</a></div><div class="venue">Coursera (Imperial College London)</div></div></div>
+          <div class="pub"><div class="year">2019</div><div><div class="title"><a href="https://www.credly.com/badges/fffeac0e-2ff6-4c32-aa45-c20ebebaedd9/public_url" target="_blank" rel="noopener">Artificial Intelligence Analyst – Mastery Award</a></div><div class="venue">IBM</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="more-btn" type="button" data-toggle="certMore" aria-expanded="false" aria-controls="certMore"
+            data-more="Show 6 certificates" data-less="Hide certificates">
+      <span class="more-label">Show 6 certificates</span>
+      <svg class="chev" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="reveal" style="padding:0">
+    <div class="contact">
+      <div>
+        <h2>Let's work together</h2>
+        <p>Whether you work on rPPG, radar sensing, driver monitoring or biosignal AI, and want to compare methods, share data or write a paper together, write to me.</p>
+        <div class="mail">Write to <a href="mailto:abdelrhman.y.soliman@urv.cat">abdelrhman.y.soliman@urv.cat</a></div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:abdelrhman.y.soliman@urv.cat?subject=Research%20collaboration">Email me</a>
+        <a class="btn btn-ghost" href="Abdelrhman_Y_Soliman_CV.pdf" download>Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>Abdelrhman Y. Soliman · IRCV Lab, Universitat Rovira i Virgili, Tarragona, Spain</div>
+      <div>Last updated Nov 2026</div>
+    </div>
+  </footer>
+
+  </div>
+</main>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- theme toggle ----------
+  var root = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+  var saved = null;
+  try { saved = localStorage.getItem('theme'); } catch(e) {}
+  if (saved === 'dark') { root.setAttribute('data-theme', 'dark'); toggle.setAttribute('aria-pressed', 'true'); }
+  toggle.addEventListener('click', function(){
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.removeAttribute('data-theme'); toggle.setAttribute('aria-pressed', 'false'); }
+    else { root.setAttribute('data-theme', 'dark'); toggle.setAttribute('aria-pressed', 'true'); }
+    try { localStorage.setItem('theme', isDark ? 'light' : 'dark'); } catch(e) {}
+  });
+
+  // ---------- mobile menu ----------
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinksEl = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function(){
+    var open = navLinksEl.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinksEl.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') { navLinksEl.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // ---------- "see more" collapsible sections ----------
+  document.querySelectorAll('.more-btn[data-toggle]').forEach(function(btn){
+    var target = document.getElementById(btn.getAttribute('data-toggle'));
+    if (!target) return;
+    btn.addEventListener('click', function(){
+      var collapsed = !target.classList.contains('collapsed');
+      target.classList.toggle('collapsed', collapsed);
+      btn.classList.toggle('open', !collapsed);
+      btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      var label = btn.querySelector('.more-label');
+      if (label) label.textContent = collapsed ? btn.getAttribute('data-more') : btn.getAttribute('data-less');
+    });
+  });
+
+  // ---------- scroll: progress bar, scroll-spy, back to top ----------
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var sections = navLinks.map(function(a){ return document.getElementById(a.getAttribute('data-nav')); }).filter(Boolean);
+  var topnav = document.getElementById('topnav');
+  var progress = document.getElementById('progress');
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    var y = window.scrollY;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+    topnav.classList.toggle('scrolled', y > 12);
+    var pos = y + window.innerHeight * 0.3, current = null;
+    sections.forEach(function(sec){ if (sec.offsetTop <= pos) current = sec; });
+    navLinks.forEach(function(a){ a.classList.toggle('active', current && a.getAttribute('data-nav') === current.id); });
+    toTop.classList.toggle('show', y > 500);
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  toTop.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
+
+  // ---------- scroll reveal ----------
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  // ---------- animated metric counters ----------
+  function animateCount(el){
+    var target = parseInt(el.getAttribute('data-count-to'), 10);
+    if (isNaN(target)) return;
+    if (reduceMotion) { el.textContent = target; return; }
+    var start = null, duration = 1800;
+    function step(ts){
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  var counters = document.querySelectorAll('[data-count-to]');
+  if ('IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { animateCount(entry.target); io2.unobserve(entry.target); }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function(el){ io2.observe(el); });
+  } else {
+    counters.forEach(function(el){ el.textContent = el.getAttribute('data-count-to'); });
+  }
+
+  // ---------- publication filter ----------
+  var chips = document.querySelectorAll('.filter-chip');
+  var pubEmpty = document.getElementById('pubEmpty');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+      chip.classList.add('active'); chip.setAttribute('aria-pressed', 'true');
+      var filter = chip.getAttribute('data-filter'), visible = 0;
+      document.querySelectorAll('#pubList .pub').forEach(function(pub){
+        var show = filter === 'all' || (pub.getAttribute('data-tags') || '').split(' ').indexOf(filter) !== -1;
+        pub.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      pubEmpty.hidden = visible !== 0;
+    });
+  });
+
+  // ---------- rotating research focus ----------
+  var rot = document.getElementById('rotator');
+  var phrases = [
+    'contactless heart rate for drivers',
+    'rPPG in low light',
+    'FMCW radar vital signs',
+    'RGB, NIR and radar fusion',
+    'ECG–PPG stress classification',
+    'non-invasive glucose from PPG'
+  ];
+  if (rot && !reduceMotion) {
+    var idx = 0;
+    setInterval(function(){
+      rot.classList.add('swap');
+      setTimeout(function(){ idx = (idx + 1) % phrases.length; rot.textContent = phrases[idx]; rot.classList.remove('swap'); }, 700);
+    }, 6000);
+  }
+
+  // ---------- hero animation: RGB, NIR and radar traces fused into one pulse ----------
+  (function(){
+    var cv = document.getElementById('beamCanvas');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var W = 0, H = 0, dpr = 1, t = 0, running = true, raf = null;
+
+    function size(){
+      var r = cv.parentElement.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      cv.width = Math.max(1, W * dpr); cv.height = Math.max(1, H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    // cardiac phase: about 72 bpm with slow drift
+    function phase(tau){ return 1.2 * tau + 0.05 * Math.sin(0.3 * tau); }
+    function bpm(tau){ return 60 * (1.2 + 0.015 * Math.cos(0.3 * tau)); }
+    function pulse(tau){
+      var p = phase(tau); p = p - Math.floor(p);
+      var sys = Math.exp(-Math.pow((p - 0.18) / 0.07, 2));
+      var dic = 0.38 * Math.exp(-Math.pow((p - 0.47) / 0.09, 2));
+      return sys + dic - 0.35;
+    }
+    function noise(tau, k){
+      return 0.5 * Math.sin(11.3 * tau + k) + 0.3 * Math.sin(23.7 * tau + 2.1 * k) + 0.2 * Math.sin(41.9 * tau + 3.3 * k);
+    }
+    var lanes = [
+      { name: 'RGB',   noise: 0.30, wander: 0.35, resp: 0.0 },
+      { name: 'NIR',   noise: 0.55, wander: 0.15, resp: 0.0 },
+      { name: 'RADAR', noise: 0.20, wander: 0.05, resp: 0.70 }
+    ];
+    function laneSig(L, tau, i){
+      return pulse(tau) + L.noise * noise(tau, i * 1.7)
+           + L.wander * Math.sin(0.9 * tau + i) + L.resp * Math.sin(2 * Math.PI * 0.25 * tau);
+    }
+
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      var small = W < 760;
+      var sec = t / 1000, speed = small ? 55 : 80;          // px per second
+      var x0 = 0, xm = W * (small ? 0.62 : 0.70);            // lanes run to the fusion node
+      var node = { x: xm + 34, y: H * 0.80 };
+      var laneY = [H * 0.64, H * 0.74, H * 0.84];
+      var amp = small ? 7 : 10;
+
+      // raw lanes
+      lanes.forEach(function(L, i){
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = 'rgba(220,238,255,.20)';
+        ctx.beginPath();
+        for (var x = x0; x <= xm; x += 3) {
+          var tau = sec - (xm - x) / speed;
+          var y = laneY[i] - amp * laneSig(L, tau, i);
+          if (x === x0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        // converge into the node
+        var yEnd = laneY[i] - amp * laneSig(L, sec, i);
+        ctx.quadraticCurveTo(xm + 18, yEnd, node.x, node.y);
+        ctx.stroke();
+        if (!small) {
+          ctx.fillStyle = 'rgba(220,238,255,.34)';
+          ctx.font = '600 10px "Bricolage Grotesque", sans-serif';
+          ctx.fillText(L.name, 12, laneY[i] - amp - 6);
+        }
+      });
+
+      // fusion node
+      var p = phase(sec); p = p - Math.floor(p);
+      var beat = Math.exp(-Math.pow((p - 0.18) / 0.08, 2));
+      ctx.fillStyle = 'rgba(184,228,255,' + (0.18 + 0.25 * beat).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(node.x, node.y, 9 + 5 * beat, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#B8E4FF';
+      ctx.beginPath(); ctx.arc(node.x, node.y, 4, 0, Math.PI * 2); ctx.fill();
+
+      // fused, clean pulse to the right edge
+      var g = ctx.createLinearGradient(node.x, 0, W, 0);
+      g.addColorStop(0, 'rgba(184,228,255,.75)');
+      g.addColorStop(1, 'rgba(95,195,247,.25)');
+      ctx.strokeStyle = g; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var x2 = node.x; x2 <= W; x2 += 2) {
+        var tau2 = sec - (x2 - node.x) / speed;   // newest sample at the node, older to the right
+        var y2 = node.y - (amp + 4) * pulse(tau2);
+        if (x2 === node.x) ctx.moveTo(x2, y2); else ctx.lineTo(x2, y2);
+      }
+      ctx.stroke();
+
+      // heart-rate readout
+      ctx.fillStyle = 'rgba(234,243,255,.55)';
+      ctx.font = '600 ' + (small ? 11 : 12) + 'px "Bricolage Grotesque", sans-serif';
+      ctx.fillText('HR ' + Math.round(bpm(sec)) + ' bpm', node.x + 14, node.y - amp - 22);
+
+      // radar arcs from a small sensor at the lower left of the fused trace
+      for (var r = 0; r < 3; r++) {
+        var rad = ((t * 0.012) + r * 60) % 180;
+        ctx.strokeStyle = 'rgba(184,228,255,' + (0.22 * (1 - rad / 180)).toFixed(3) + ')';
+        ctx.lineWidth = 1.1;
+        ctx.beginPath(); ctx.arc(W * 0.97, H * 0.16, rad, Math.PI * 0.55, Math.PI * 1.0); ctx.stroke();
+      }
+    }
+
+    function loop(ts){ t = ts; draw(); if (running) raf = requestAnimationFrame(loop); }
+
+    size();
+    window.addEventListener('resize', function(){ size(); if (reduceMotion) draw(); });
+    if (reduceMotion) { t = 9000; draw(); return; }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries){
+        var vis = entries[0].isIntersecting;
+        if (vis && !running) { running = true; raf = requestAnimationFrame(loop); }
+        if (!vis) { running = false; if (raf) cancelAnimationFrame(raf); }
+      }, { threshold: 0 }).observe(cv);
+    }
+    raf = requestAnimationFrame(loop);
+  })();
+
+})();
+</script>
+</body>
+</html>
